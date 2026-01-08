@@ -32,22 +32,22 @@ export default {
   setup(props) {
     const statusConfig = {
       applied: {
-        text: 'Applied',
+        text: 'ส่งใบสมัครแล้ว',
         classes: 'bg-blue-100 text-blue-800',
         icon: 'ClockIcon'
       },
       interview: {
-        text: 'Interview',
+        text: 'สัมภาษณ์',
         classes: 'bg-yellow-100 text-yellow-800',
         icon: 'CalendarIcon'
       },
       accepted: {
-        text: 'Accepted',
+        text: 'ได้รับการตอบรับ',
         classes: 'bg-green-100 text-green-800',
         icon: 'CheckCircleIcon'
       },
       rejected: {
-        text: 'Rejected',
+        text: 'ถูกปฏิเสธ',
         classes: 'bg-red-100 text-red-800',
         icon: 'XCircleIcon'
       }

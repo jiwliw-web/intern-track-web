@@ -5,7 +5,7 @@
       <!-- Modal Header -->
       <div class="flex justify-between items-center mb-6">
         <h3 class="text-lg font-semibold text-gray-900">
-          {{ isEditing ? 'Edit Application' : 'Add New Application' }}
+          {{ isEditing ? 'แก้ไขใบสมัคร' : 'เพิ่มใบสมัครใหม่' }}
         </h3>
         <button
           @click="$emit('cancel')"
@@ -20,7 +20,7 @@
         <!-- Company Name -->
         <div>
           <label for="companyName" class="block text-sm font-medium text-gray-700 mb-2">
-            Company Name *
+            ชื่อบริษัท *
           </label>
           <input
             id="companyName"
@@ -28,14 +28,14 @@
             type="text"
             required
             class="input-field"
-            placeholder="Enter company name"
+            placeholder="กรอกชื่อบริษัท"
           />
         </div>
 
         <!-- Business Type -->
         <div>
           <label for="businessType" class="block text-sm font-medium text-gray-700 mb-2">
-            Business Type *
+            ประเภทธุรกิจ *
           </label>
           <input
             id="businessType"
@@ -43,14 +43,14 @@
             type="text"
             required
             class="input-field"
-            placeholder="e.g., Technology, Finance, Healthcare"
+            placeholder="เช่น เทคโนโลยี, การเงิน, สุขภาพ"
           />
         </div>
 
         <!-- Location -->
         <div>
           <label for="location" class="block text-sm font-medium text-gray-700 mb-2">
-            Location *
+            สถานที่ *
           </label>
           <input
             id="location"
@@ -58,7 +58,7 @@
             type="text"
             required
             class="input-field"
-            placeholder="e.g., San Francisco, CA or Remote"
+            placeholder="เช่น กรุงเทพฯ หรือ ทำงานจากที่บ้าน"
           />
         </div>
 
@@ -67,7 +67,7 @@
           <!-- Applied Date -->
           <div>
             <label for="appliedDate" class="block text-sm font-medium text-gray-700 mb-2">
-              Applied Date *
+              วันที่สมัคร *
             </label>
             <input
               id="appliedDate"
@@ -81,7 +81,7 @@
           <!-- Interview Date -->
           <div>
             <label for="interviewDate" class="block text-sm font-medium text-gray-700 mb-2">
-              Interview Date
+              วันที่สัมภาษณ์
             </label>
             <input
               id="interviewDate"
@@ -95,7 +95,7 @@
         <!-- Status -->
         <div>
           <label for="status" class="block text-sm font-medium text-gray-700 mb-2">
-            Status *
+            สถานะ *
           </label>
           <select
             id="status"
@@ -103,11 +103,11 @@
             required
             class="input-field"
           >
-            <option value="">Select status</option>
-            <option value="applied">Applied</option>
-            <option value="interview">Interview</option>
-            <option value="accepted">Accepted</option>
-            <option value="rejected">Rejected</option>
+            <option value="">เลือกสถานะ</option>
+            <option value="applied">ส่งใบสมัครแล้ว</option>
+            <option value="interview">สัมภาษณ์</option>
+            <option value="accepted">ได้รับการตอบรับ</option>
+            <option value="rejected">ถูกปฏิเสธ</option>
           </select>
         </div>
 
@@ -120,21 +120,21 @@
             class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
           />
           <label for="reminderEnabled" class="ml-2 block text-sm text-gray-700">
-            Enable interview reminder
+            เปิดการแจ้งเตือนสัมภาษณ์
           </label>
         </div>
 
         <!-- Note -->
         <div>
           <label for="note" class="block text-sm font-medium text-gray-700 mb-2">
-            Notes
+            หมายเหตุ
           </label>
           <textarea
             id="note"
             v-model="form.note"
             rows="3"
             class="input-field resize-none"
-            placeholder="Add any additional notes about this application..."
+            placeholder="เพิ่มหมายเหตุเพิ่มเติมเกี่ยวกับใบสมัครนี้..."
           ></textarea>
         </div>
 
@@ -145,14 +145,14 @@
             @click="$emit('cancel')"
             class="btn-secondary"
           >
-            Cancel
+            ยกเลิก
           </button>
           <button
             type="submit"
             class="btn-primary"
             :disabled="!isFormValid"
           >
-            {{ isEditing ? 'Update Application' : 'Add Application' }}
+            {{ isEditing ? 'อัปเดตใบสมัคร' : 'เพิ่มใบสมัคร' }}
           </button>
         </div>
       </form>

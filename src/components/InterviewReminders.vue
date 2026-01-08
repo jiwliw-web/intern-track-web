@@ -2,7 +2,7 @@
   <div class="bg-orange-50 border border-orange-200 rounded-lg p-6">
     <div class="flex items-center mb-4">
       <BellIcon class="h-6 w-6 text-orange-600 mr-3" />
-      <h3 class="text-lg font-semibold text-orange-900">Upcoming Interviews</h3>
+      <h3 class="text-lg font-semibold text-orange-900">สัมภาษณ์ที่จะมาถึง</h3>
     </div>
     
     <div class="space-y-3">
@@ -33,7 +33,7 @@
     <div class="mt-4 text-sm text-orange-700">
       <p class="flex items-center">
         <ClockIcon class="h-4 w-4 mr-2" />
-        Showing interviews scheduled within the next 7 days
+        แสดงการสัมภาษณ์ที่กำหนดไว้ใน 7 วันข้างหน้า
       </p>
     </div>
   </div>
@@ -66,27 +66,27 @@ export default {
       
       // Check if it's today
       if (date.toDateString() === today.toDateString()) {
-        return `Today at ${date.toLocaleTimeString('en-US', { 
+        return `วันนี้ เวลา ${date.toLocaleTimeString('th-TH', { 
           hour: 'numeric', 
           minute: '2-digit',
-          hour12: true 
+          hour12: false 
         })}`
       }
       
       // Check if it's tomorrow
       if (date.toDateString() === tomorrow.toDateString()) {
-        return `Tomorrow at ${date.toLocaleTimeString('en-US', { 
+        return `พรุ่งนี้ เวลา ${date.toLocaleTimeString('th-TH', { 
           hour: 'numeric', 
           minute: '2-digit',
-          hour12: true 
+          hour12: false 
         })}`
       }
       
       // Otherwise show full date
-      return date.toLocaleDateString('en-US', {
+      return date.toLocaleDateString('th-TH', {
         weekday: 'long',
         year: 'numeric',
-        month: 'short',
+        month: 'long',
         day: 'numeric'
       })
     }
@@ -97,10 +97,10 @@ export default {
       const diffTime = interviewDate.getTime() - today.getTime()
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
       
-      if (diffDays === 0) return 'Today'
-      if (diffDays === 1) return 'Tomorrow'
-      if (diffDays > 1) return `In ${diffDays} days`
-      return 'Past due'
+      if (diffDays === 0) return 'วันนี้'
+      if (diffDays === 1) return 'พรุ่งนี้'
+      if (diffDays > 1) return `ใน ${diffDays} วัน`
+      return 'เลยกำหนดแล้ว'
     }
 
     return {

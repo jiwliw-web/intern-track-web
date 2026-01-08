@@ -13,7 +13,7 @@
             class="btn-primary flex items-center"
           >
             <PlusIcon class="h-5 w-5 mr-2" />
-            Add Application
+            เพิ่มใบสมัคร
           </button>
         </div>
       </div>
@@ -24,25 +24,25 @@
       <!-- Stats Cards -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <StatCard
-          title="Total Applications"
+          title="ใบสมัครทั้งหมด"
           :value="applications.length"
           icon="BriefcaseIcon"
           color="blue"
         />
         <StatCard
-          title="Interviews"
+          title="สัมภาษณ์"
           :value="interviewCount"
           icon="CalendarIcon"
           color="yellow"
         />
         <StatCard
-          title="Accepted"
+          title="ได้รับการตอบรับ"
           :value="acceptedCount"
           icon="CheckCircleIcon"
           color="green"
         />
         <StatCard
-          title="Upcoming Interviews"
+          title="สัมภาษณ์ที่จะมาถึง"
           :value="upcomingInterviews"
           icon="ClockIcon"
           color="orange"
@@ -59,18 +59,18 @@
       <!-- Applications List -->
       <div class="card">
         <div class="flex justify-between items-center mb-6">
-          <h2 class="text-xl font-semibold text-gray-900">Applications</h2>
+          <h2 class="text-xl font-semibold text-gray-900">ใบสมัครงาน</h2>
           <div class="flex items-center space-x-4">
             <!-- Filter by status -->
             <select
               v-model="statusFilter"
               class="input-field w-auto"
             >
-              <option value="">All Status</option>
-              <option value="applied">Applied</option>
-              <option value="interview">Interview</option>
-              <option value="accepted">Accepted</option>
-              <option value="rejected">Rejected</option>
+              <option value="">สถานะทั้งหมด</option>
+              <option value="applied">ส่งใบสมัครแล้ว</option>
+              <option value="interview">สัมภาษณ์</option>
+              <option value="accepted">ได้รับการตอบรับ</option>
+              <option value="rejected">ถูกปฏิเสธ</option>
             </select>
           </div>
         </div>
@@ -78,16 +78,16 @@
         <!-- Loading State -->
         <div v-if="loading" class="text-center py-8">
           <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-          <p class="text-gray-500 mt-2">Loading applications...</p>
+          <p class="text-gray-500 mt-2">กำลังโหลดใบสมัคร...</p>
         </div>
 
         <!-- Empty State -->
         <div v-else-if="filteredApplications.length === 0" class="text-center py-12">
           <BriefcaseIcon class="h-12 w-12 text-gray-400 mx-auto mb-4" />
-          <h3 class="text-lg font-medium text-gray-900 mb-2">No applications found</h3>
-          <p class="text-gray-500 mb-4">Get started by adding your first internship application.</p>
+          <h3 class="text-lg font-medium text-gray-900 mb-2">ไม่พบใบสมัครงาน</h3>
+          <p class="text-gray-500 mb-4">เริ่มต้นด้วยการเพิ่มใบสมัครฝึกงานแรกของคุณ</p>
           <button @click="showAddForm = true" class="btn-primary">
-            Add Application
+            เพิ่มใบสมัคร
           </button>
         </div>
 
@@ -208,7 +208,7 @@ export default {
     }
 
     const deleteApplication = async (applicationId) => {
-      if (confirm('Are you sure you want to delete this application?')) {
+      if (confirm('คุณแน่ใจหรือไม่ว่าต้องการลบใบสมัครนี้?')) {
         try {
           await firestoreService.deleteApplication(applicationId)
           await loadApplications()

@@ -19,19 +19,19 @@
     <div class="space-y-2 mb-4">
       <div class="flex items-center text-sm text-gray-600">
         <CalendarIcon class="h-4 w-4 mr-2" />
-        <span class="font-medium">Applied:</span>
+        <span class="font-medium">สมัครเมื่อ:</span>
         <span class="ml-1">{{ formatDate(application.appliedDate) }}</span>
       </div>
       
       <div v-if="application.interviewDate" class="flex items-center text-sm">
         <ClockIcon class="h-4 w-4 mr-2" />
-        <span class="font-medium">Interview:</span>
+        <span class="font-medium">สัมภาษณ์:</span>
         <span class="ml-1" :class="getInterviewDateClass()">
           {{ formatDate(application.interviewDate) }}
         </span>
         <span v-if="isUpcoming" class="ml-2 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
           <BellIcon class="h-3 w-3 mr-1" />
-          Upcoming
+          ใกล้ถึงแล้ว
         </span>
       </div>
     </div>
@@ -50,14 +50,14 @@
         class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors duration-200"
       >
         <PencilIcon class="h-4 w-4 mr-1" />
-        Edit
+        แก้ไข
       </button>
       <button
         @click="$emit('delete', application.id)"
         class="flex items-center px-3 py-2 text-sm font-medium text-red-700 bg-red-100 hover:bg-red-200 rounded-lg transition-colors duration-200"
       >
         <TrashIcon class="h-4 w-4 mr-1" />
-        Delete
+        ลบ
       </button>
     </div>
   </div>
@@ -108,12 +108,12 @@ export default {
     })
 
     const formatDate = (dateString) => {
-      if (!dateString) return 'Not set'
+      if (!dateString) return 'ไม่ได้กำหนด'
       
       const date = new Date(dateString)
-      return date.toLocaleDateString('en-US', {
+      return date.toLocaleDateString('th-TH', {
         year: 'numeric',
-        month: 'short',
+        month: 'long',
         day: 'numeric'
       })
     }
