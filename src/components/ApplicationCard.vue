@@ -38,9 +38,30 @@
 
     <!-- Note -->
     <div v-if="application.note" class="mb-4">
-      <p class="text-sm text-gray-700 bg-gray-50 rounded-lg p-3">
-        {{ application.note }}
-      </p>
+      <div class="text-sm text-gray-700 bg-gray-50 rounded-lg p-3">
+        <p v-if="!showFullNote && isNoteLong" class="mb-2">
+          {{ truncatedNote }}
+        </p>
+        <p v-else>
+          {{ application.note }}
+        </p>
+        
+        <button
+          v-if="isNoteLong"
+          @click="showFullNote = !showFullNote"
+          class="text-blue-600 hover:text-blue-800 text-xs font-medium mt-2 flex items-center transition-colors duration-200"
+        >
+          {{ showFullNote ? 'แสดงน้อยลง' : 'อ่านเพิ่มเติม' }}
+          <ChevronDownIcon 
+            v-if="!showFullNote" 
+            class="h-3 w-3 ml-1" 
+          />
+          <ChevronUpIcon 
+            v-else 
+            class="h-3 w-3 ml-1" 
+          />
+        </button>
+      </div>
     </div>
 
     <!-- Actions -->
@@ -64,14 +85,16 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { 
   MapPinIcon, 
   CalendarIcon, 
   ClockIcon, 
   PencilIcon, 
   TrashIcon,
-  BellIcon
+  BellIcon,
+  ChevronDownIcon,
+  ChevronUpIcon
 } from '@heroicons/vue/24/outline'
 import StatusBadge from './StatusBadge.vue'
 
@@ -84,7 +107,9 @@ export default {
     ClockIcon,
     PencilIcon,
     TrashIcon,
-    BellIcon
+    BellIcon,
+    ChevronDownIcon,
+    ChevronUpIcon
   },
   props: {
     application: {
@@ -94,6 +119,10 @@ export default {
   },
   emits: ['edit', 'delete'],
   setup(props) {
+    // Note expansion state
+    const showFullNote = ref(false)
+    const maxNoteLength = 100 // Maximum characters to show before truncating
+
     // Check if interview is upcoming (within 7 days)
     const isUpcoming = computed(() => {
       if (!props.application.interviewDate || props.application.status !== 'interview') {
@@ -105,6 +134,17 @@ export default {
       const sevenDaysFromNow = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)
       
       return interviewDate >= now && interviewDate <= sevenDaysFromNow
+    })
+
+    // Check if note is long enough to truncate
+    const isNoteLong = computed(() => {
+      return props.application.note && props.application.note.length > maxNoteLength
+    })
+
+    // Truncated version of the note
+    const truncatedNote = computed(() => {
+      if (!props.application.note) return ''
+      return props.application.note.substring(0, maxNoteLength) + '...'
     })
 
     const formatDate = (dateString) => {
@@ -129,7 +169,10 @@ export default {
     }
 
     return {
+      showFullNote,
       isUpcoming,
+      isNoteLong,
+      truncatedNote,
       formatDate,
       getInterviewDateClass
     }
