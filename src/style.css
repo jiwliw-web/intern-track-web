@@ -1,10 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    @apply font-sans bg-gray-50;
+    font-family: 'Bai Jamjuree', 'Poppins', sans-serif;
+    @apply bg-gray-50;
+  }
+  
+  /* Apply Bai Jamjuree for Thai text and Poppins for English */
+  * {
+    font-family: 'Bai Jamjuree', 'Poppins', sans-serif;
   }
 }
 
