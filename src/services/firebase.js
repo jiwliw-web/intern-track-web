@@ -1,6 +1,16 @@
 // Firebase configuration and service functions
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  updateDoc,
+  deleteDoc,
+  query,
+  orderBy,
+} from "firebase/firestore";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -10,7 +20,7 @@ const firebaseConfig = {
   storageBucket: "interntrack-b7024.firebasestorage.app",
   messagingSenderId: "262366428246",
   appId: "1:262366428246:web:f0a019b650a3d0e31d0ff7",
-  measurementId: "G-Q27DJKRPN0"
+  measurementId: "G-Q27DJKRPN0",
 };
 
 // Initialize Firebase
@@ -25,7 +35,7 @@ export const firestoreService = {
       const docRef = await addDoc(collection(db, "applications"), {
         ...applicationData,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       });
       return docRef.id;
     } catch (error) {
@@ -37,17 +47,20 @@ export const firestoreService = {
   // Get all applications
   async getApplications() {
     try {
-      const q = query(collection(db, "applications"), orderBy("appliedDate", "desc"));
+      const q = query(
+        collection(db, "applications"),
+        orderBy("appliedDate", "desc")
+      );
       const querySnapshot = await getDocs(q);
       const applications = [];
-      
+
       querySnapshot.forEach((doc) => {
         applications.push({
           id: doc.id,
-          ...doc.data()
+          ...doc.data(),
         });
       });
-      
+
       return applications;
     } catch (error) {
       console.error("Error getting applications:", error);
@@ -61,7 +74,7 @@ export const firestoreService = {
       const applicationRef = doc(db, "applications", id);
       await updateDoc(applicationRef, {
         ...applicationData,
-        updatedAt: new Date()
+        updatedAt: new Date(),
       });
     } catch (error) {
       console.error("Error updating application:", error);
@@ -77,5 +90,5 @@ export const firestoreService = {
       console.error("Error deleting application:", error);
       throw error;
     }
-  }
+  },
 };
