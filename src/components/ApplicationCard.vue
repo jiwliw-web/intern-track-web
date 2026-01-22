@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+  <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200 flex flex-col h-full">
     <!-- Header -->
     <div class="flex justify-between items-start mb-4">
       <div class="flex-1">
@@ -37,7 +37,7 @@
     </div>
 
     <!-- Note -->
-    <div v-if="application.note" class="mb-4">
+    <div v-if="application.note" class="mb-4 flex-grow">
       <div class="text-sm text-gray-700 bg-gray-50 rounded-lg p-3">
         <p v-if="!showFullNote && isNoteLong" class="mb-2">
           {{ truncatedNote }}
@@ -64,8 +64,11 @@
       </div>
     </div>
 
+    <!-- Spacer to push actions to bottom -->
+    <div v-else class="flex-grow"></div>
+
     <!-- Actions -->
-    <div class="flex justify-end space-x-2 pt-4 border-t border-gray-100">
+    <div class="flex justify-end space-x-2 pt-4 border-t border-gray-100 mt-auto">
       <button
         @click="$emit('edit', application)"
         class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors duration-200"
